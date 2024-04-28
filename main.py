@@ -43,7 +43,6 @@ def positive_registration_test(driver):
     registration_page.open()
     registration_page.register("John", "Doe", "john.doe@example.com", "password")
 
-    # Check if registration is successful
     assert "My Account" in driver.title
     assert "Thank you for registering with Main Website Store." in driver.page_source
 
@@ -52,14 +51,12 @@ def negative_registration_test(driver):
     registration_page.open()
     registration_page.register("", "", "", "")  # Empty fields
 
-    # Check if validation errors are displayed
     assert "This is a required field." in driver.page_source
 
 def positive_authorization_test(driver):
     authorization_page = AuthorizationPage(driver)
     authorization_page.login("john.doe@example.com", "password")
 
-    # Check if login is successful
     assert "My Account" in driver.title
     assert "Hello, John Doe!" in driver.page_source
 
@@ -67,7 +64,6 @@ def negative_authorization_test(driver):
     authorization_page = AuthorizationPage(driver)
     authorization_page.login("invalid@example.com", "invalidpassword")
 
-    # Check if error message is displayed
     assert "Invalid login or password." in driver.page_source
 
 if __name__ == "__main__":
